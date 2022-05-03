@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Day</th>
+                <th>Menu</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="date : ${dates}">
+                <td th:text="${date.day}"></td>
+                <td th:text="${date.menu}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
