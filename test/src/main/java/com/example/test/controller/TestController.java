@@ -1,5 +1,6 @@
 package com.example.test.controller;
 
+import com.example.test.domain.Jimin2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,18 +17,6 @@ public class TestController {
         }
 
         String name;
-    }
-
-    public class Jimin2{
-        public Long getAge() {
-            return age;
-        }
-
-        public void setAge(Long age) {
-            this.age = age;
-        }
-
-        private Long age;
     }
 
     @ResponseBody
@@ -47,9 +36,7 @@ public class TestController {
     @ResponseBody
     @PostMapping("/post")
     public String method(@RequestBody Jimin2 jimin2){
-//        jimin2.setName("jimin");
-//        jimin2.setAge(17);
-//        jimin2.setClass_num(2);
-        return "post="+jimin2.getAge();
+        return "post="+jimin2.getDate();
     }
+
 }
