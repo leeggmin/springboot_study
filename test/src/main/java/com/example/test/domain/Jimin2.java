@@ -1,6 +1,7 @@
 package com.example.test.domain;
 
 public class Jimin2 {
+
     private Long date;
 
     public Long getDate() {
