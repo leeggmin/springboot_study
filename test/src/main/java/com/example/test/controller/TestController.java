@@ -2,10 +2,17 @@ package com.example.test.controller;
 
 import com.example.test.domain.Jimin2;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-//@Controller
+@Controller
 public class TestController {
+
+    @GetMapping("/name")
+    public String name(Model model){
+        model.addAttribute("name","엄준식");
+        return "name";
+    }
 
     public class Jimin{
         public String getName() {

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
-@RestController
+//@RestController
 public class ExRestController {
 
     @GetMapping("/map")
