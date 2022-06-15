@@ -8,7 +8,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
-class sMemberRepositoryTest {
+class MemberRepositoryTest {
 
     @Autowired MemberRepository memberRepository;
 
