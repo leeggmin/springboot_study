@@ -2,6 +2,7 @@ package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.Assert.*;
 
 //@RunWith(SpringRunner.class)
-@ExtendWith(SpringExtension.class)
+//@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
 public class MemberServiceTest {
@@ -23,6 +24,7 @@ public class MemberServiceTest {
     @Autowired MemberService memberService;
 
     @Test
+    @DisplayName("회원가입")
     public void joinTest() throws Exception {
         //given
         Member member = new Member();
@@ -38,12 +40,20 @@ public class MemberServiceTest {
     @Test
     public void validateDuplicateMemberTest() throws Exception {
         //given
-        Member member = new Member();
-        member.setName("Kim");
+        Member member1 = new Member();
+        member1.setName("Kim");
+        Member member2 = new Member();
+        member2.setName("Kim");
 
         //when
-
+        memberService.join(member1);
+        try {
+            memberService.join(member2);
+        } catch (IllegalStateException e){
+            return;
+        }
 
         //then
+        fail("예외가 발생해야 한다.");
     }
 }
