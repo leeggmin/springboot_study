@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class TestController {
 
+    @GetMapping("/show")
+    public String show(@RequestParam("num")String img_num, Model model){
+        model.addAttribute("num",img_num);
+        return "show";
+    }
+
     @GetMapping("/name")
     public String name(Model model){
         model.addAttribute("name","엄준식");

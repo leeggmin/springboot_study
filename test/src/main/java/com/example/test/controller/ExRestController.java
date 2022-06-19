@@ -1,12 +1,26 @@
 package com.example.test.controller;
 
+import com.example.test.service.FindPageCount;
+import com.example.test.domain.Img;
 import com.example.test.domain.Member;
 import org.springframework.web.bind.annotation.*;
-
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-//@RestController
+@RestController
 public class ExRestController {
+
+    @RequestMapping("/show_img/test")
+    public List<Img> send_img(HttpServletRequest request){
+        List<Img> imgList =new ArrayList<>();
+        FindPageCount findPageCount = new FindPageCount();
+        String whatYouCall = request.getServletPath();
+        findPageCount.setCount(whatYouCall);
+        System.out.println("result = "+findPageCount.getCount());
+        return imgList;
+    }
 
     @GetMapping("/map")
     public HashMap<String,Object> testMap(){
