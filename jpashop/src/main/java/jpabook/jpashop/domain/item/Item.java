@@ -26,7 +26,7 @@ public abstract class Item {
     @ManyToMany(mappedBy = "items")
     private List<Category> categories=new ArrayList<>();
 
-    //비즈니스 로직
+    //==비즈니스 로직==//
 
     //재고 증가
     public void addStock(int quantity){
