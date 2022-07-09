@@ -45,7 +45,7 @@ public class ItemController {
         return "items/itemList";
     }
 
-    @GetMapping("items/{itemId}/edit")
+    @GetMapping("/items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId")Long itemId, Model model){
         Book item = (Book) itemService.findOne(itemId);
 
@@ -58,6 +58,26 @@ public class ItemController {
         form.setStockQuantity(item.getStockQuantity());
 
         model.addAttribute("form",form);
-        return "";
+        return "items/updateItemForm";
+    }
+
+    @PostMapping("/items/{itemId}/edit")
+    public String updateItem(@PathVariable("itemId")Long itemId, BookForm form){
+
+//        controller에서 엔티티를 생성하지 말자
+//        Book book = new Book();
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+
+//        merge(병합) 사용
+//        itemService.saveItem(book);
+
+        //merge(병합)보다는 변경감지를 사용하여 엔티티내에서 직접 변경
+        itemService.updateItem(itemId, form.getName(),form.getPrice(),form.getStockQuantity());
+        return "redirect:/items";
     }
 }
