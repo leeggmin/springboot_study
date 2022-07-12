@@ -34,7 +34,8 @@ public class MemberApiController {
             @RequestBody UpdateMemberRequest request){
 
         memberService.update(id,request.getName());
-        return new UpdateMemberResponse(id, request.getName());
+        Member findMember = memberService.findOne(id);
+        return new UpdateMemberResponse(findMember.getId(),findMember.getName());
     }
 
     @Data
