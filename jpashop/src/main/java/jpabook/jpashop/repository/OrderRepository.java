@@ -49,4 +49,23 @@ public class OrderRepository {
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
         return query.getResultList();
     }
+
+    //fetch join
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" + //query 문을 추가할 때는 앞에 공백을 둬야함
+                        " join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
+
+    //Dto 직접 생성 = query 직접 작성
+    public List<OrderSimpleQueryDto> findOrderDtos(){
+        return em.createQuery(
+                "select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
+                        " from Order o" +
+                        " join o.member m" +
+                        " join o.delivery d", OrderSimpleQueryDto.class)
+                .getResultList();
+    }
 }
