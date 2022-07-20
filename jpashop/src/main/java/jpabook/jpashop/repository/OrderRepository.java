@@ -68,4 +68,13 @@ public class OrderRepository {
                         " join o.delivery d", OrderSimpleQueryDto.class)
                 .getResultList();
     }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member o" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems", Order.class)
+                .getResultList();
+    }
 }
