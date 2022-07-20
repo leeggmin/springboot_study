@@ -41,10 +41,16 @@ public class OrderApiController {
     @GetMapping("/api/v2/orders")
     public List<OrderDto> ordersV2(){
         List<Order> orders = orderRepository.findAllByCriteria(new OrderSearch());
-        List<OrderDto> collect = orders.stream()
+        List<OrderDto> result = orders.stream()
                 .map(o -> new OrderDto(o))
                 .collect(Collectors.toList());
-        return collect;
+        return result;
+    }
+
+    @GetMapping("/api/v3/orders")
+    public List<OrderDto> ordersV3(){
+        List<Order> orders = orderRepository.findAllWithItem();
+        return
     }
 
     @Data
@@ -54,7 +60,7 @@ public class OrderApiController {
         private LocalDateTime localDateTime;
         private OrderStatus orderStatus;
         private Address address;
-        private List<OrderItem> orderItems;
+        private List<OrderItemDto> orderItems;
 
         public OrderDto(Order order) {
             orderId = order.getId();
@@ -62,7 +68,25 @@ public class OrderApiController {
             localDateTime = order.getOrderDate();
             orderStatus = order.getStatus();
             address = order.getDelivery().getAddress();
-            orderItems = order.getOrderItems();
+//            order.getOrderItems().stream().forEach(o->o.getItem().getName());
+//            orderItems = order.getOrderItems();
+            orderItems = order.getOrderItems().stream()
+                    .map(orderItem -> new OrderItemDto(orderItem))
+                    .collect(Collectors.toList());
+        }
+    }
+
+    @Data
+    static class OrderItemDto{
+
+        private String itemName; //상품 명
+        private int itemPrice; //주문 가격
+        private int count; //주문 수량
+
+        public OrderItemDto(OrderItem orderItem) {
+            itemName = orderItem.getItem().getName();
+            itemPrice = orderItem.getOrderPrice();
+            count = orderItem.getCount();
         }
     }
 }
