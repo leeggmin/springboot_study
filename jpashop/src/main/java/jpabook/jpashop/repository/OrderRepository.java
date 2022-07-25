@@ -2,6 +2,7 @@ package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.repository.simplequery.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -62,7 +63,7 @@ public class OrderRepository {
     //Dto 직접 생성 = query 직접 작성
     public List<OrderSimpleQueryDto> findOrderDtos(){
         return em.createQuery(
-                "select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
+                "select new jpabook.jpashop.repository.query.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
                         " from Order o" +
                         " join o.member m" +
                         " join o.delivery d", OrderSimpleQueryDto.class)
@@ -80,9 +81,10 @@ public class OrderRepository {
     }
 
     public List<Order> findAllWithMemberDelivery(int offset, int limit) {
-        return em.createQuery("select o from Order o" +
-                " join fetch o.member m" +
-                " join fetch o.delivery d", Order.class)
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
