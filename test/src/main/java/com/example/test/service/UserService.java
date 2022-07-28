@@ -14,14 +14,25 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public String join(String Id, String pw){
+    public String join(String id, String name, String pw){
 
         User user = new User();
-        user.setId(Id);
+        user.setId(id);
+        user.setName(name);
         user.setPw(pw);
 
         userRepository.save(user);
 
         return user.getId();
+    }
+
+    public void overLay(User user){
+
+    }
+
+    public User readOne(String id){
+
+        User user = userRepository.findById(id);
+        return user;
     }
 }
