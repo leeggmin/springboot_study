@@ -16,6 +16,8 @@ public class UserService {
     @Transactional
     public String join(String id, String name, String pw){
 
+        overLayId(id);
+
         User user = new User();
         user.setId(id);
         user.setName(name);
@@ -26,8 +28,11 @@ public class UserService {
         return user.getId();
     }
 
-    public void overLay(User user){
-
+    public void overLayId(String id){
+        User user = userRepository.findById(id);
+        if(user.getIdx()!=null){
+            throw new RuntimeException("overLayId");
+        }
     }
 
     public User readOne(String id){
