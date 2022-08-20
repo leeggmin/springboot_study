@@ -2,7 +2,7 @@ package com.example.security.config;
 
 import com.example.security.jwt.JwtAuthenticationFilter;
 import com.example.security.jwt.JwtTokenProvider;
-import com.example.security.member.service.CustomOAuth2UserService;
+import com.example.security.member.service.CustomOAuth2MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomOAuth2MemberService customOAuth2MemberService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
@@ -43,7 +43,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessUrl("/")
                 .and().oauth2Login()
-                .userInfoEndpoint().userService(customOAuth2UserService);
+                .userInfoEndpoint().userService(customOAuth2MemberService);
     }
 
     @Bean
