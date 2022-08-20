@@ -2,6 +2,7 @@ package com.example.security.config;
 
 import com.example.security.jwt.JwtAuthenticationFilter;
 import com.example.security.jwt.JwtTokenProvider;
+import com.example.security.member.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
+                //Jwt config
                 .httpBasic().disable()
                 .cors().and()
                 .csrf().disable()
@@ -32,7 +35,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("/", "/**").permitAll()
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+                //OAuth config
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/","/css/**","/images/**","/js/**","/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+                .and().logout().logoutSuccessUrl("/")
+                .and().oauth2Login()
+                .userInfoEndpoint().userService(customOAuth2UserService);
     }
 
     @Bean
