@@ -42,7 +42,6 @@ public class CustomOAuth2MemberService implements OAuth2UserService<OAuth2UserRe
     }
 
     public Member save(OAuthAttributes attributes){
-        return memberRepository.findByEmail(attributes.getEmail())
-                .orElse(attributes.toEntity());
+        return memberRepository.save(attributes.toEntity());
     }
 }
