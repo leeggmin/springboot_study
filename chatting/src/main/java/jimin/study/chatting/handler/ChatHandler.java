@@ -1,5 +1,10 @@
 package jimin.study.chatting.handler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jimin.study.chatting.chat.dto.ChatMessage;
+import jimin.study.chatting.chat.dto.ChatRoom;
+import jimin.study.chatting.chat.service.ChatService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -11,14 +16,22 @@ import java.util.HashMap;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class ChatHandler extends TextWebSocketHandler {
 
+    private final ObjectMapper objectMapper;
+    private final ChatService chatService;
     private static HashMap<String, WebSocketSession> sessionMap = new HashMap<>();
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         String payload = message.getPayload();
 
+        ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
+        ChatRoom chatRoom = chatService.findByChatRoomId(chatMessage.getRoomId());
+        chatRoom.handleActions(session, chatMessage, chatService);
+
+//        여기 밑부턴 채팅방 1개 로직
         for (String key : sessionMap.keySet()) {
             WebSocketSession ws = sessionMap.get(key);
             try {
