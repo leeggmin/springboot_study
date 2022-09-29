@@ -1,4 +1,4 @@
-package jimin.study.chatting.chat.dto;
+package jimin.study.chatting.chat.ro;
 
 import lombok.Getter;
 
@@ -14,7 +14,7 @@ public class ChatMessage {
     private String sender;
     private String message;
 
-    public void setMessage(String message) {
+    protected void setMessage(String message) {
         this.message = message;
     }
 }

@@ -1,7 +1,7 @@
 package jimin.study.chatting.chat.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jimin.study.chatting.chat.dto.ChatRoom;
+import jimin.study.chatting.chat.ro.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -10,6 +10,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -38,5 +39,9 @@ public class ChatService {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
+    }
+
+    public List<ChatRoom> findAllRoom() {
+        return chatRooms.values().stream().toList();
     }
 }

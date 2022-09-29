@@ -1,5 +1,6 @@
-package jimin.study.chatting.chat.dto;
+package jimin.study.chatting.chat.ro;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jimin.study.chatting.chat.service.ChatService;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,17 +14,20 @@ public class ChatRoom {
 
     private String roomId;
     private String name;
-    private Set<WebSocketSession> sessions = new HashSet<>();
+    @JsonIgnore
+    private Set<WebSocketSession> sessions;
 
     @Builder
     public ChatRoom(String roomId, String name) {
         this.roomId = roomId;
         this.name = name;
+        this.sessions = new HashSet<>();
     }
 
     public void handleActions(WebSocketSession session, ChatMessage chatMessage, ChatService chatService) {
         if (chatMessage.getMessageType().equals(ChatMessage.MessageType.ENTER)) {
             sessions.add(session);
+            System.out.println(sessions);
             chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");
         }
         sendMessage(chatMessage, chatService);
