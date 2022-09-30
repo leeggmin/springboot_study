@@ -1,4 +1,4 @@
-package jimin.study.chatting.chat.ro;
+package jimin.study.chatting.webSocket.ro;
 
 import lombok.Getter;
 

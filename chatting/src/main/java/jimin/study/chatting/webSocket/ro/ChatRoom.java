@@ -1,7 +1,7 @@
-package jimin.study.chatting.chat.ro;
+package jimin.study.chatting.webSocket.ro;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jimin.study.chatting.chat.service.ChatService;
+import jimin.study.chatting.webSocket.service.ChatService;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.web.socket.WebSocketSession;

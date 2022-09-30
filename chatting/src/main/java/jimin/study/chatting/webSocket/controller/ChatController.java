@@ -1,7 +1,7 @@
-package jimin.study.chatting.chat.controller;
+package jimin.study.chatting.webSocket.controller;
 
-import jimin.study.chatting.chat.ro.ChatRoom;
-import jimin.study.chatting.chat.service.ChatService;
+import jimin.study.chatting.webSocket.ro.ChatRoom;
+import jimin.study.chatting.webSocket.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
