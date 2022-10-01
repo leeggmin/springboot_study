@@ -1,9 +1,9 @@
 package jimin.study.chatting.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jimin.study.chatting.chat.ro.ChatMessage;
-import jimin.study.chatting.chat.ro.ChatRoom;
-import jimin.study.chatting.chat.service.ChatService;
+import jimin.study.chatting.webSocket.ro.ChatMessage;
+import jimin.study.chatting.webSocket.ro.ChatRoom;
+import jimin.study.chatting.webSocket.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
