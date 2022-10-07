@@ -1,4 +1,4 @@
-package jimin.study.chatting.entity;
+package jimin.study.chatting.stomp.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,6 +26,10 @@ public class Message {
     @Column(nullable = false)
     @CreatedDate
     private LocalDateTime sendMessageDateTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id", nullable = false)

@@ -1,10 +1,9 @@
-package jimin.study.chatting.entity;
+package jimin.study.chatting.stomp.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,6 +20,9 @@ public class Room {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "room")
+    private List<UserToRoom> userToRooms = new ArrayList<>();
 
     @OneToMany(mappedBy = "room")
     private List<Message> messages = new ArrayList<>();
