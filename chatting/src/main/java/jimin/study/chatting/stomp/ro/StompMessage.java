@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 public class StompMessage {
 
     private String sender;
-    private String channelId;
+    private String roomId;
     private String message;
 }

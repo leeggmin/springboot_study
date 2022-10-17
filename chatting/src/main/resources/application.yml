@@ -17,6 +17,10 @@ spring:
       matching-strategy: ant_path_matcher
     static-path-pattern: /static/**
 
+server:
+  port: 30000
+  address: 0.0.0.0
+
 logging:
   level:
     org.hibernate.SQL: debug

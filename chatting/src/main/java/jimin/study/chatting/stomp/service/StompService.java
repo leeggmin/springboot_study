@@ -30,9 +30,8 @@ public class StompService {
 
     @Transactional
     public void sendMessage(StompMessage message) {
-        Optional.ofNullable(roomRepository.findById(Long.parseLong(message.getChannelId()))).ifPresentOrElse(
-                room -> {
-                    messageRepository.save(Message.builder()
+        Optional.ofNullable(roomRepository.findById(Long.parseLong(message.getRoomId()))).ifPresentOrElse(
+                room -> { messageRepository.save(Message.builder()
                                     .room(room.get())
                                     .text(message.getMessage()).build());
                 }, () -> {throw new ChatException("Room not found");});
