@@ -26,3 +26,6 @@ logging:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
     com.amazonaws.util.EC2MetadataUtils: error
+
+product:
+  jwt-secret-key: ${JWT_SECRET_KEY}
