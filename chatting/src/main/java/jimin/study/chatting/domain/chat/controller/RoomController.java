@@ -5,7 +5,6 @@ import jimin.study.chatting.domain.chat.dto.RoomCreateDto;
 import jimin.study.chatting.domain.chat.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
