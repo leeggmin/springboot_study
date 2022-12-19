@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/comit_shop?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: wlals0330
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+  address: 0.0.0.0
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
