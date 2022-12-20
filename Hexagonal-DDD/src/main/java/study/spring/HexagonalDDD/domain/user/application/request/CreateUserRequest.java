@@ -1,6 +1,6 @@
-package study.spring.HexagonalDDD.user.application.request;
+package study.spring.HexagonalDDD.domain.user.application.request;
 
-import study.spring.HexagonalDDD.user.domain.model.User;
+import study.spring.HexagonalDDD.domain.user.domain.model.User;
 import lombok.Getter;
 
 @Getter

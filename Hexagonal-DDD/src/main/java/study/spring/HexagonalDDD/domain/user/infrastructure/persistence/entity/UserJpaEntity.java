@@ -1,6 +1,6 @@
-package study.spring.HexagonalDDD.user.infrastructure.persistence.entity;
+package study.spring.HexagonalDDD.domain.user.infrastructure.persistence.entity;
 
-import study.spring.HexagonalDDD.user.domain.model.User;
+import study.spring.HexagonalDDD.domain.user.domain.model.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

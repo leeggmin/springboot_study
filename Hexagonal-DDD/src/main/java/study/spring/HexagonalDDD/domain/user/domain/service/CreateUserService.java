@@ -1,9 +1,9 @@
-package study.spring.HexagonalDDD.user.domain.service;
+package study.spring.HexagonalDDD.domain.user.domain.service;
 
 import org.springframework.stereotype.Service;
-import study.spring.HexagonalDDD.user.domain.model.User;
-import study.spring.HexagonalDDD.user.domain.port.inbound.CreateUserUseCase;
-import study.spring.HexagonalDDD.user.domain.port.outbound.CreateUserPort;
+import study.spring.HexagonalDDD.domain.user.domain.port.inbound.CreateUserUseCase;
+import study.spring.HexagonalDDD.domain.user.domain.model.User;
+import study.spring.HexagonalDDD.domain.user.domain.port.outbound.CreateUserPort;
 import lombok.RequiredArgsConstructor;
 
 @Service

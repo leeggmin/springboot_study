@@ -1,7 +1,7 @@
-package study.spring.HexagonalDDD.user.application.controller;
+package study.spring.HexagonalDDD.domain.user.application.controller;
 
-import study.spring.HexagonalDDD.user.application.request.CreateUserRequest;
-import study.spring.HexagonalDDD.user.domain.port.inbound.CreateUserUseCase;
+import study.spring.HexagonalDDD.domain.user.application.request.CreateUserRequest;
+import study.spring.HexagonalDDD.domain.user.domain.port.inbound.CreateUserUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

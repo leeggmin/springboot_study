@@ -1,4 +1,4 @@
-package study.spring.HexagonalDDD.user.domain.model;
+package study.spring.HexagonalDDD.domain.user.domain.model;
 
 import lombok.Builder;
 import lombok.Getter;
