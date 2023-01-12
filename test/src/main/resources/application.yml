@@ -1,0 +1,25 @@
+spring:
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: ${DB_PW}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+#    org.hibernate.SQL: debug
+    org.hibernate.type: trace

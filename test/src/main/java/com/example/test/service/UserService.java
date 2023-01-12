@@ -1,43 +1,55 @@
 package com.example.test.service;
 
 import com.example.test.domain.User;
-import com.example.test.repository.UserRepository;
+import com.example.test.repository.UserRepositoryDataJPA;
+import com.example.test.repository.UserRepositoryJPA;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepositoryJPA userRepository;
+    private final UserRepositoryDataJPA userRepositoryDataJPA;
 
     @Transactional
-    public String join(String id, String name, String pw){
+    public String join(String email, String name, String pw){
 
-        overLayId(id);
+        overLayId(email);
 
         User user = new User();
-        user.setId(id);
+        user.setEmail(email);
         user.setName(name);
         user.setPw(pw);
 
-        userRepository.save(user);
+        userRepositoryDataJPA.save(user);
 
-        return user.getId();
+        return user.getEmail();
     }
 
-    public void overLayId(String id){
-        User user = userRepository.findById(id);
-        if(user.getIdx()!=null){
+    public void overLayId(String email){
+        Optional<User> user = userRepositoryDataJPA.findByEmail(email);
+        if(user.isPresent()==true){
             throw new RuntimeException("overLayId");
         }
     }
 
+    @Cacheable(value = "user", key = "#id")
     public User readOne(String id){
 
-        User user = userRepository.findById(id);
-        return user;
+        Optional<User> user = userRepositoryDataJPA.findByEmail(id);
+        return user.get();
+    }
+
+    @Cacheable(value = "user")
+    public List<User> getList() {
+        return userRepositoryDataJPA.findAll();
     }
 }

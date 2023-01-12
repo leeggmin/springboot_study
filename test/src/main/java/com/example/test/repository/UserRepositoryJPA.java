@@ -17,7 +17,7 @@ public class UserRepository {
     }
 
     public User findById(String id){
-        return em.createQuery("select u from User u where u.id = :id",User.class)
+        return em.createQuery("select u from User u where u.email = :id",User.class)
                 .setParameter("id",id)
                 .getSingleResult();
     }
